@@ -1,0 +1,92 @@
+/* One small stylesheet for the demo site: the listing (index.html) and every
+   post page Content Studio commits (posts/<slug>/index.html links here as
+   ../../style.css). Post pages carry no styles of their own, so the class
+   names below are the contract with api/publish-github.js buildPostPage:
+   post-page, site-head, site-home, post, post-date, post-hero, post-body,
+   post-foot. Colours, radii and shadows come from the tokens in :root. */
+
+:root {
+  --bg: #f7f5f1;
+  --surface: #ffffff;
+  --ink: #1f2328;
+  --muted: #5f6670;
+  --hair: #e4e0d8;
+  --accent: #2f6f5e;
+  --accent-soft: #e3efe9;
+  --r-sm: 6px;
+  --r-md: 12px;
+  --shadow-sm: 0 1px 2px rgba(31, 35, 40, 0.06);
+  --shadow-md: 0 6px 20px rgba(31, 35, 40, 0.08);
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --measure: 68ch;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #141615;
+    --surface: #1c1f1e;
+    --ink: #ecebe7;
+    --muted: #a3a8a6;
+    --hair: #2d3230;
+    --accent: #7cc4ad;
+    --accent-soft: #1f3530;
+    --shadow-sm: none;
+    --shadow-md: none;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 17px/1.6 var(--sans);
+  -webkit-text-size-adjust: 100%;
+}
+
+a { color: var(--accent); }
+img { max-width: 100%; height: auto; display: block; }
+code { font-size: 0.9em; background: var(--accent-soft); padding: 0.1em 0.35em; border-radius: var(--r-sm); }
+
+.wrap { max-width: 960px; margin: 0 auto; padding: 0 16px; }
+
+/* ───── Listing ───── */
+
+.masthead { padding: 56px 0 32px; border-bottom: 1px solid var(--hair); }
+.eyebrow { margin: 0 0 8px; color: var(--accent); font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+.site-title { margin: 0; font: 600 clamp(32px, 6vw, 48px)/1.1 var(--serif); }
+.site-sub { margin: 12px 0 0; color: var(--muted); max-width: 52ch; }
+
+.status { margin: 32px 0; color: var(--muted); }
+.status-error { color: #b3261e; }
+
+.post-list { list-style: none; margin: 32px 0; padding: 0; display: grid; gap: 20px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+.post-card { background: var(--surface); border: 1px solid var(--hair); border-radius: var(--r-md); box-shadow: var(--shadow-sm); overflow: hidden; transition: box-shadow 0.15s ease, transform 0.15s ease; }
+.post-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.post-link { display: flex; flex-direction: column; height: 100%; color: inherit; text-decoration: none; }
+.post-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.post-thumb { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: var(--accent-soft); }
+.post-text { padding: 16px 18px 20px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.post-meta { color: var(--muted); font-size: 14px; }
+.post-title { margin: 0; font: 600 21px/1.3 var(--serif); }
+.post-excerpt { margin: 0; color: var(--muted); font-size: 15px; }
+.post-more { margin-top: auto; padding-top: 8px; color: var(--accent); font-size: 14px; font-weight: 600; }
+
+.site-foot { border-top: 1px solid var(--hair); padding: 24px 0 40px; color: var(--muted); font-size: 14px; }
+
+/* ───── Post page (written by Content Studio) ───── */
+
+.post-page .site-head { max-width: var(--measure); margin: 0 auto; padding: 24px 16px 0; }
+.site-home { font-size: 15px; text-decoration: none; }
+.site-home:hover { text-decoration: underline; }
+.post { max-width: var(--measure); margin: 0 auto; padding: 16px 16px 24px; }
+.post h1 { margin: 16px 0 4px; font: 600 clamp(30px, 5.5vw, 42px)/1.15 var(--serif); }
+.post-date { margin: 0 0 24px; color: var(--muted); font-size: 15px; }
+.post-hero { width: 100%; border-radius: var(--r-md); margin: 0 0 28px; aspect-ratio: 16 / 9; object-fit: cover; }
+.post-body h2 { margin: 36px 0 8px; font: 600 26px/1.25 var(--serif); }
+.post-body h3 { margin: 28px 0 6px; font-size: 19px; }
+.post-body p, .post-body ul, .post-body ol { margin: 0 0 16px; }
+.post-body li { margin: 4px 0; }
+.post-foot { max-width: var(--measure); margin: 0 auto; padding: 16px 16px 48px; border-top: 1px solid var(--hair); color: var(--muted); font-size: 14px; }
